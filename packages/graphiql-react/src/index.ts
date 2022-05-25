@@ -61,6 +61,14 @@ import type { HistoryContextType } from './history';
 import type { SchemaContextType } from './schema';
 import type { StorageContextType } from './storage';
 
+import './root.css';
+import './editor/style/codemirror.css';
+import './editor/style/lint.css';
+import './editor/style/hint.css';
+import './editor/style/fold.css';
+import './editor/style/info.css';
+import './editor/style/jump.css';
+
 export {
   // editor
   EditorContext,

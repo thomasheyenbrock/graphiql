@@ -1,0 +1,79 @@
+/* Popup styles */
+.CodeMirror-info {
+  background-color: var(--color-neutral-0);
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow);
+  color: var(--color-neutral-100);
+  max-width: 400px;
+  opacity: 0;
+  overflow: hidden;
+  padding: var(--px-12);
+  position: fixed;
+  transition: opacity 0.15s;
+}
+
+/* Link styles */
+.CodeMirror-info a {
+  color: inherit;
+  text-decoration: none;
+}
+.CodeMirror-info a:hover {
+  text-decoration: underline dotted;
+}
+
+/* Align elements in header */
+.CodeMirror-info .CodeMirror-info-header {
+  display: flex;
+  align-items: baseline;
+}
+
+/* Main elements */
+.CodeMirror-info .CodeMirror-info-header > .type-name,
+.CodeMirror-info .CodeMirror-info-header > .field-name,
+.CodeMirror-info .CodeMirror-info-header > .arg-name,
+.CodeMirror-info .CodeMirror-info-header > .directive-name,
+.CodeMirror-info .CodeMirror-info-header > .enum-value {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Type names */
+.CodeMirror-info .type-name-pill {
+  border: 1px solid var(--color-neutral-40);
+  border-radius: var(--border-radius-4);
+  color: var(--color-neutral-60);
+  margin-left: var(--px-6);
+  padding: var(--px-4);
+}
+
+/* Descriptions */
+.CodeMirror-info .info-description {
+  color: var(--color-neutral-60);
+  margin-top: var(--px-12);
+  max-height: 80px;
+  overflow: hidden;
+}
+.CodeMirror-info .info-description > :first-child {
+  margin-top: 0;
+}
+.CodeMirror-info .info-description > :last-child {
+  margin-bottom: 0;
+}
+
+/* Deprecation info */
+.CodeMirror-info .info-deprecation {
+  background-color: var(--color-orche-background);
+  border: 1px solid var(--color-orche);
+  border-radius: var(--border-radius-4);
+  margin-top: var(--px-12);
+  padding: var(--px-6);
+}
+.CodeMirror-info .info-deprecation-label {
+  font-weight: var(--font-weight-medium);
+}
+.CodeMirror-info .info-deprecation :nth-child(2) {
+  margin-top: var(--px-6);
+}
+.CodeMirror-info .info-deprecation :last-child {
+  margin-bottom: 0;
+}
