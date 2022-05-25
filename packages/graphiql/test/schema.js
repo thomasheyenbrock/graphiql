@@ -276,6 +276,12 @@ const TestType = new GraphQLObjectType({
       description: 'This field is an example of a deprecated field',
       deprecationReason: 'No longer in use, try `test` instead.',
     },
+    alsoDeprecated: {
+      type: TestType,
+      description: 'This field is an example of a deprecated field',
+      deprecationReason:
+        'No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead. No longer in use, try `test` instead.',
+    },
     hasArgs: {
       type: GraphQLString,
       resolve(_value, args) {
