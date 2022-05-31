@@ -83,8 +83,6 @@ declare namespace window {
   export let g: GraphiQLWithContext;
 }
 
-export type Maybe<T> = T | null | undefined;
-
 export type GraphiQLToolbarConfig = {
   additionalContent?: React.ReactNode;
 };
@@ -492,10 +490,6 @@ class GraphiQLWithContext extends React.Component<
   GraphiQLWithContextConsumerProps,
   GraphiQLState
 > {
-  // refs
-  graphiqlContainer: Maybe<HTMLDivElement>;
-  editorBarComponent: Maybe<HTMLDivElement>;
-
   constructor(props: GraphiQLWithContextConsumerProps) {
     super(props);
 
