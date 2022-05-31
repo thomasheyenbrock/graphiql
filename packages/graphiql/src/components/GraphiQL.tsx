@@ -704,9 +704,14 @@ class GraphiQLWithContext extends React.Component<
                             ) {
                               secondaryEditorResize.reset();
                             }
-                            this.setState({
-                              activeSecondaryEditor: 'variable',
-                            });
+                            this.setState(
+                              {
+                                activeSecondaryEditor: 'variable',
+                              },
+                              () => {
+                                this.props.editorContext.variableEditor?.refresh();
+                              },
+                            );
                           }}>
                           Query Variables
                         </div>
@@ -726,9 +731,14 @@ class GraphiQLWithContext extends React.Component<
                               ) {
                                 secondaryEditorResize.reset();
                               }
-                              this.setState({
-                                activeSecondaryEditor: 'header',
-                              });
+                              this.setState(
+                                {
+                                  activeSecondaryEditor: 'header',
+                                },
+                                () => {
+                                  this.props.editorContext.headerEditor?.refresh();
+                                },
+                              );
                             }}>
                             Request Headers
                           </div>
