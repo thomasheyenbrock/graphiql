@@ -288,11 +288,6 @@ export type GraphiQLProps = {
   children?: ReactNode;
 };
 
-export type GraphiQLState = {
-  variableEditorActive: boolean;
-  headerEditorActive: boolean;
-};
-
 /**
  * The top-level React component for GraphiQL, intended to encompass the entire
  * browser viewport.
@@ -485,6 +480,10 @@ type GraphiQLWithContextConsumerProps = Omit<
   prettify(): void;
 };
 
+export type GraphiQLState = {
+  activeSecondaryEditor: 'variable' | 'header';
+};
+
 class GraphiQLWithContext extends React.Component<
   GraphiQLWithContextConsumerProps,
   GraphiQLState
@@ -493,15 +492,7 @@ class GraphiQLWithContext extends React.Component<
     super(props);
 
     // Initialize state
-    this.state = {
-      variableEditorActive:
-        this.props.storageContext?.get('variableEditorActive') === 'true' ||
-        props.headerEditorEnabled
-          ? this.props.storageContext?.get('headerEditorActive') !== 'true'
-          : true,
-      headerEditorActive:
-        this.props.storageContext?.get('headerEditorActive') === 'true',
-    };
+    this.state = { activeSecondaryEditor: 'variable' };
   }
 
   componentDidMount() {
@@ -703,7 +694,9 @@ class GraphiQLWithContext extends React.Component<
                         id="secondary-editor-title">
                         <div
                           className={`variable-editor-title-text${
-                            this.state.variableEditorActive ? ' active' : ''
+                            this.state.activeSecondaryEditor === 'variable'
+                              ? ' active'
+                              : ''
                           }`}
                           onClick={() => {
                             if (
@@ -712,8 +705,7 @@ class GraphiQLWithContext extends React.Component<
                               secondaryEditorResize.reset();
                             }
                             this.setState({
-                              headerEditorActive: false,
-                              variableEditorActive: true,
+                              activeSecondaryEditor: 'variable',
                             });
                           }}>
                           Query Variables
@@ -724,7 +716,9 @@ class GraphiQLWithContext extends React.Component<
                               marginLeft: '20px',
                             }}
                             className={`variable-editor-title-text${
-                              this.state.headerEditorActive ? ' active' : ''
+                              this.state.activeSecondaryEditor === 'header'
+                                ? ' active'
+                                : ''
                             }`}
                             onClick={() => {
                               if (
@@ -733,8 +727,7 @@ class GraphiQLWithContext extends React.Component<
                                 secondaryEditorResize.reset();
                               }
                               this.setState({
-                                headerEditorActive: true,
-                                variableEditorActive: false,
+                                activeSecondaryEditor: 'header',
                               });
                             }}>
                             Request Headers
@@ -746,7 +739,7 @@ class GraphiQLWithContext extends React.Component<
                       <section
                         className="variable-editor secondary-editor"
                         aria-label={
-                          this.state.variableEditorActive
+                          this.state.activeSecondaryEditor === 'variable'
                             ? 'Query Variables'
                             : 'Request Headers'
                         }>
@@ -754,11 +747,15 @@ class GraphiQLWithContext extends React.Component<
                           onEdit={this.props.onEditVariables}
                           editorTheme={this.props.editorTheme}
                           readOnly={this.props.readOnly}
-                          active={this.state.variableEditorActive}
+                          active={
+                            this.state.activeSecondaryEditor === 'variable'
+                          }
                         />
                         {this.props.headerEditorEnabled && (
                           <HeaderEditor
-                            active={this.state.headerEditorActive}
+                            active={
+                              this.state.activeSecondaryEditor === 'header'
+                            }
                             editorTheme={this.props.editorTheme}
                             onEdit={this.props.onEditHeaders}
                             readOnly={this.props.readOnly}
